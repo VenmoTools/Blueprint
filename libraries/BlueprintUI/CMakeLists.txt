@@ -1,5 +1,5 @@
 
-add_library(BlueprintUI STATIC)
+add_library(BlueprintUI STATIC )
 add_library(Blueprint::UI ALIAS BlueprintUI )
 
 init_target(BlueprintUI)
@@ -11,9 +11,20 @@ nice_target_source(BlueprintUI ${src_loc}
         PUBLIC
         Canvas/BlueprintCanvas.cc
         Canvas/BlueprintCanvas.hpp
+        Canvas/BlueprintNode.cc
+        Canvas/BlueprintNode.hpp
+        Canvas/BlueprintPin.cc
+        Canvas/BlueprintPin.hpp
 
+        BlueprintStyle/NodeStyle.cc
+        BlueprintStyle/NodeStyle.hpp
         BlueprintStyle/CanvasStyle.cc
         BlueprintStyle/CanvasStyle.hpp
+
+        BlueprintPainter/PinPainter.cc
+        BlueprintPainter/PinPainter.hpp
+        BlueprintPainter/NodePainter.cc
+        BlueprintPainter/NodePainter.hpp
 
         Utils/Algorithm.hpp
         )

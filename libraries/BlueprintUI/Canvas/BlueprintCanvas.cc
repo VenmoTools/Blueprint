@@ -32,7 +32,8 @@ QGraphicsScene *ui::BlueprintCanvas::createFirstScene() {
 }
 
 void ui::BlueprintCanvas::wheelEvent(QWheelEvent *event) {
-    qreal zoomFactor = 1.0 * event->angleDelta().y() * 0.0005;
+    QGraphicsView::wheelEvent(event);
+    qreal zoomFactor = 1.0 + event->angleDelta().y() * 0.0005;
     zoom(zoomFactor);
 }
 
@@ -41,17 +42,17 @@ void ui::BlueprintCanvas::drawBackground(QPainter *painter, const QRectF &rect) 
 
     int lod = lodValueFromCurrentScale();
 
-    painter->fillRect(rect, QBrush{QColor(35, 35, 35)});//todo:QColor(35, 35, 35)
+    painter->fillRect(rect, QBrush{QColor(38, 38, 38)});//todo:QColor(35, 35, 35)
 
     auto calcGridLimitPos = [](double max, int gridSize) -> int {
-        return static_cast<int>(max) - static_cast<int>(max) % gridSize;
+        return static_cast<int>(max) - (static_cast<int>(max) % gridSize);
     };
 
     int left = calcGridLimitPos(rect.left(), style->smallGridSize());
     int top = calcGridLimitPos(rect.top(), style->smallGridSize());
 
     if (style->needDrawGrid()) {
-        if (lod > style->lodThreshold()) {
+        if (lod <= style->lodThreshold()) {
             drawGridDetail(painter, rect, left, top, style->smallGridSize());
         }
         left = calcGridLimitPos(rect.left(), style->hugeGridSize());
@@ -82,7 +83,7 @@ void ui::BlueprintCanvas::drawGridRuler(QPainter *painter, const QRectF &rect, i
     while (left < rect.right()) {
         x += style->hugeGridSize();
         if (x > left + 30) {
-            painter->setPen(QPen{QColor(20, 20, 20).lighter(300)});
+            painter->setPen(QPen{QColor(20, 20, 20).lighter(300), 1});
             painter->drawText(static_cast<int>(x),
                               static_cast<int>(rect.top() + painter->font().pointSizeF()),
                               QString::number(static_cast<int>(x)));
@@ -94,20 +95,21 @@ void ui::BlueprintCanvas::drawGridDetail(QPainter *painter, const QRectF &rect, 
                                          bool thick) {
     QList<QLineF> horizontalLines{};
     auto y = static_cast<qreal>(top);
-    while (top < rect.bottom()) {
+    while (y < rect.bottom()) {
         horizontalLines.emplace_back(QLineF{rect.left(), y, rect.right(), y});
         y += gridSize;
     }
 
     QList<QLineF> verticalLines{};
-
     auto x = static_cast<qreal>(left);
-    while (left < rect.right()) {
+    while (x < rect.right()) {
         verticalLines.emplace_back(QLineF{x, rect.top(), x, rect.bottom()});
         x += gridSize;
     }
     if (thick) {
-        painter->setPen(QPen{QColor(20, 20, 20), 1.5});
+        painter->setPen(QPen{QColor(22, 22, 22), 0.5});
+    }else{
+        painter->setPen(QPen{QColor(53, 53, 53), 0.5});
     }
     painter->drawLines(horizontalLines);
     painter->drawLines(verticalLines);

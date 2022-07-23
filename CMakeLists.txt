@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(BlueprintCore)
 
-set(QT_DIR /Users/venmosnake/Documents/Qt6Arm)
+set(QT_DIR D:/LIBS/QT6/6.1.3/msvc2019_64)
 set(REQUIRED_QT_6 ON)
 
 #set(CMAKE_CXX_STANDARD 17)

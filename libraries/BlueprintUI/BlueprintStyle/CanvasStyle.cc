@@ -7,8 +7,7 @@
 #include <QPainter>
 
 
-ui::CanvasStyle::CanvasStyle()
-        : QObject(), gridFont(QFont{"JetBrainsMono"}) {
+ui::CanvasStyle::CanvasStyle() : QObject(), gridFont(QFont{"YaHei"}) {
 }
 
 
@@ -17,7 +16,7 @@ int ui::CanvasStyle::smallGridSize() const {
 }
 
 bool ui::CanvasStyle::needDrawGrid() const {
-    return gridNum;
+    return true;
 }
 
 int ui::CanvasStyle::lodThreshold() const {
@@ -45,6 +44,9 @@ void ui::CanvasStyle::applyStyle(QGraphicsView *view) {
     view->setAcceptDrops(true);
     view->setAttribute(Qt::WA_AlwaysShowToolTips);
     view->setResizeAnchor(QGraphicsView::AnchorUnderMouse);
+
+    view->setFocusPolicy(Qt::StrongFocus);
+    view->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 ui::CanvasStyle::~CanvasStyle() = default;

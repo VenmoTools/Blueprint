@@ -16,7 +16,7 @@ namespace ui {
     Q_OBJECT
     protected:
         QFont gridFont;
-        bool gridNum{true};
+        bool gridNum{false};
         int lod{3};
         int hugeGrid{100};
         int smallGrid{10};
