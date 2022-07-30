@@ -22,7 +22,7 @@ namespace ui {
 
         int zLayer();
 
-        int borderRadius();
+        int borderRadius() const;
 
         QColor &nodeBackgroundColor();
 

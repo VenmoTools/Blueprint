@@ -10,6 +10,7 @@
 
 namespace ui {
 
+    class BlueprintNode;
 
     class BlueprintPin : public QGraphicsWidget {
     public:
@@ -18,11 +19,12 @@ namespace ui {
             Output,
         };
     private:
+        QWeakPointer<BlueprintNode> node;
         PinDirection _direction;
+        int _pinSize{6};
 
     public:
-        explicit BlueprintPin(PinDirection direction, QGraphicsItem *parent = nullptr,
-                              Qt::WindowFlags wFlags = Qt::WindowFlags());
+        explicit BlueprintPin(PinDirection direction, QWeakPointer<BlueprintNode> parentNode);
 
         bool isConnected();
 

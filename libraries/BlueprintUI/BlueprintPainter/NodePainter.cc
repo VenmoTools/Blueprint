@@ -4,7 +4,7 @@
 
 #include "NodePainter.hpp"
 
-#include "Canvas/BlueprintNode.hpp"
+#include "BlueprintNode/NodeUI.hpp"
 #include "BlueprintStyle/NodeStyle.hpp"
 
 #include <QPainter>
@@ -17,7 +17,7 @@ void ui::NodePainter::defaultNode(ui::BlueprintNode *node, QPainter *painter, co
 
     int radius = node->nodeStyle->borderRadius();
 
-    painter->setBrush( node->nodeStyle->nodeBackgroundColor());
+    painter->setBrush(node->nodeStyle->nodeBackgroundColor());
     painter->setPen(Qt::NoPen);
     QPen pen{Qt::black, 0.5};
 

@@ -4,17 +4,21 @@
 
 #include "BlueprintPin.hpp"
 
-#include <BlueprintPainter/PinPainter.hpp>
+#include "BlueprintNode/NodeUI.hpp"
 
-ui::BlueprintPin::BlueprintPin(PinDirection direction, QGraphicsItem *parent, Qt::WindowFlags wFlags) : QGraphicsWidget(
-        parent, wFlags), _direction(direction) {
+#include "BlueprintPainter/PinPainter.hpp"
+
+
+ui::BlueprintPin::BlueprintPin(ui::BlueprintPin::PinDirection direction, QWeakPointer<BlueprintNode> parentNode)
+        : QGraphicsWidget(), _direction(direction), node(std::move(parentNode)) {
     setGraphicsItem(this);
     setFlag(QGraphicsItem::ItemSendsGeometryChanges);
     setCacheMode(QGraphicsItem::DeviceCoordinateCache);
     setAcceptHoverEvents(true);
     setZValue(1);
-
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Maximum);
 }
+
 
 void ui::BlueprintPin::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
     QGraphicsWidget::paint(painter, option, widget);
@@ -34,9 +38,10 @@ QPointF ui::BlueprintPin::pinCenter() {
 }
 
 int ui::BlueprintPin::pinSize() {
-    return 6;
+    return _pinSize;
 }
 
 ui::BlueprintPin::PinDirection ui::BlueprintPin::direction() {
     return _direction;
 }
+

@@ -3,26 +3,27 @@
 #include <QMainWindow>
 
 #include <Canvas/BlueprintCanvas.hpp>
-#include <Canvas/BlueprintNode.hpp>
-#include <Canvas/BlueprintPin.hpp>
+#include <BlueprintNode/NodeUI.hpp>
+#include "BlueprintPin/BlueprintPin.hpp"
 
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
     QMainWindow w{};
-    w.setFixedSize(1080,720);
+    w.setFixedSize(1080, 720);
     ui::BlueprintCanvas canvas{};
     canvas.initCanvas();
 
 
-    ui::BlueprintNode node{};
-    ui::BlueprintPin exec{ui::BlueprintPin::Input};
-    ui::BlueprintPin exec2{ui::BlueprintPin::Output};
+    QSharedPointer<ui::BlueprintNode> node{new ui::BlueprintNode{}};
 
-    node.addPin(&exec);
-    node.addPin(&exec2);
+    ui::BlueprintPin exec{ui::BlueprintPin::Input, node};
+    ui::BlueprintPin exec2{ui::BlueprintPin::Output, node};
 
-    canvas.scene()->addItem(&node);
+    node->addPin(&exec);
+    node->addPin(&exec2);
+
+    canvas.scene()->addItem(node.get());
 
     w.setCentralWidget(&canvas);
 

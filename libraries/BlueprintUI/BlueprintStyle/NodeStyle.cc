@@ -22,6 +22,6 @@ QColor &ui::NodeStyle::nodeBorderColor(bool isSelected) {
     return isSelected ? borderActive : borderNormal;
 }
 
-int ui::NodeStyle::borderRadius() {
+int ui::NodeStyle::borderRadius() const {
     return radius;
 }

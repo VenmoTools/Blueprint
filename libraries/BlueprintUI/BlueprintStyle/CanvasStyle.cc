@@ -7,7 +7,7 @@
 #include <QPainter>
 
 
-ui::CanvasStyle::CanvasStyle() : QObject(), gridFont(QFont{"YaHei"}) {
+ui::CanvasStyle::CanvasStyle() : QObject(), gridFont(QFont{"JetbrainsMono"}) {
 }
 
 

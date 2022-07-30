@@ -4,7 +4,7 @@
 
 #include "PinPainter.hpp"
 
-#include "Canvas/BlueprintPin.hpp"
+#include "BlueprintPin/BlueprintPin.hpp"
 #include <QPainter>
 #include <QStyleOptionGraphicsItem>
 
