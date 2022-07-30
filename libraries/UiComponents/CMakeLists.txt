@@ -12,7 +12,8 @@ nice_target_source(Blueprint_UiComponents ${src_loc}
         PUBLIC
         DockWindow/DockTitleBar.cc
         DockWindow/DockTitleBar.hpp
-
+        Input/QGraphicsInputField.cc
+        Input/QGraphicsInputField.hpp
         )
 
 target_include_directories(Blueprint_UiComponents PUBLIC ${src_loc})
